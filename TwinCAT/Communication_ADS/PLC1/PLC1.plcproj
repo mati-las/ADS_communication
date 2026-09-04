@@ -18,10 +18,19 @@
     <LibraryReferences>{954a8f95-dea8-49e9-ab3e-9a3ffa165678}</LibraryReferences>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DUTs\Struct_IN.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Struct_OUT.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Signal_check.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Signal_generator.TcPOU">

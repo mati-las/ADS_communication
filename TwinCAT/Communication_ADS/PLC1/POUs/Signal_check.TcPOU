@@ -7,7 +7,7 @@ VAR_INPUT
 	T			:		TIME	:=T#2S;
 END_VAR
 VAR_OUTPUT
-	bOK			:		BOOL;
+	bOK			:		BOOL	:= TRUE;
 	Signal_OUT  :		BOOL;
 END_VAR
 VAR
@@ -25,7 +25,14 @@ timer(IN:=  NOT timer.Q, PT:=2*T);		(* rising edge must
 											be detected during 2 periods TO receive bOK := TRUE *)
 
 
-]]></ST>
+IF timer.ET < timer.PT THEN
+	IF rtrig.Q THEN
+		timer.IN:= FALSE;
+		bOK := TRUE;
+	END_IF
+ELSE
+	bOK	:= FALSE;
+END_IF]]></ST>
     </Implementation>
     <LineIds Name="Signal_check">
       <LineId Id="9" Count="0" />
@@ -36,6 +43,12 @@ timer(IN:=  NOT timer.Q, PT:=2*T);		(* rising edge must
       <LineId Id="23" Count="0" />
       <LineId Id="22" Count="0" />
       <LineId Id="18" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="30" Count="1" />
+      <LineId Id="26" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

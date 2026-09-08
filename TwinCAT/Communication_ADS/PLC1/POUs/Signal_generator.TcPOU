@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.16">
+  <POU Name="Signal_generator" Id="{af9d763e-313e-42be-bf5e-21670163b905}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Signal_generator
+VAR_INPUT
+	T		:	TIME	:= T#2S;
+END_VAR
+VAR_OUTPUT
+	SIGNAL	:	BOOL	:= TRUE;
+END_VAR
+VAR
+	timer	:	TON;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[timer(IN:= NOT timer.Q, PT:=T/2);
+IF timer.Q THEN
+	SIGNAL := NOT SIGNAL;
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="Signal_generator">
+      <LineId Id="9" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="15" Count="1" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

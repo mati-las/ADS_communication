@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.16">
+  <POU Name="Signal_check" Id="{bc9e2b0e-85d8-4a3b-a4a5-f4378e228aae}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Signal_check
+VAR_INPUT
+	Signal_IN	:		BOOL;
+	T			:		TIME	:=T#2S;
+END_VAR
+VAR_OUTPUT
+	bOK			:		BOOL	:= TRUE;
+	Signal_OUT  :		BOOL;
+END_VAR
+VAR
+	Signal		:		Signal_generator;
+	rtrig		:		R_TRIG;
+	timer		:		TON;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[Signal(T:=T);
+Signal_OUT := Signal.SIGNAL;
+
+rtrig(CLK:= Signal_IN);
+timer(IN:= NOT rtrig.Q, PT:=2*T);		(* rising edge must 
+											be detected during 2 periods to receive bOK := TRUE *)
+
+bOK := NOT timer.Q;	]]></ST>
+    </Implementation>
+    <LineIds Name="Signal_check">
+      <LineId Id="9" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="20" Count="2" />
+      <LineId Id="26" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

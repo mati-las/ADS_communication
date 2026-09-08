@@ -10,19 +10,16 @@ VAR_OUTPUT
 END_VAR
 VAR
 	timer	:	TON;
-	rtrig	:	R_TRIG;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[timer(IN:= NOT timer.Q, PT:=T/2);
-rtrig(CLK:=timer.IN);
-IF rtrig.Q THEN
+IF timer.Q THEN
 	SIGNAL := NOT SIGNAL;
 END_IF]]></ST>
     </Implementation>
     <LineIds Name="Signal_generator">
       <LineId Id="9" Count="0" />
-      <LineId Id="18" Count="0" />
       <LineId Id="13" Count="0" />
       <LineId Id="15" Count="1" />
     </LineIds>

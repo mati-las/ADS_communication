@@ -21,33 +21,17 @@ END_VAR
 Signal_OUT := Signal.SIGNAL;
 
 rtrig(CLK:= Signal_IN);
-timer(IN:=  NOT timer.Q, PT:=2*T);		(* rising edge must 
-											be detected during 2 periods TO receive bOK := TRUE *)
+timer(IN:= NOT rtrig.Q, PT:=2*T);		(* rising edge must 
+											be detected during 2 periods to receive bOK := TRUE *)
 
-
-IF timer.ET < timer.PT THEN
-	IF rtrig.Q THEN
-		timer.IN:= FALSE;
-		bOK := TRUE;
-	END_IF
-ELSE
-	bOK	:= FALSE;
-END_IF]]></ST>
+bOK := NOT timer.Q;	]]></ST>
     </Implementation>
     <LineIds Name="Signal_check">
       <LineId Id="9" Count="0" />
       <LineId Id="16" Count="0" />
       <LineId Id="24" Count="0" />
       <LineId Id="17" Count="0" />
-      <LineId Id="20" Count="1" />
-      <LineId Id="23" Count="0" />
-      <LineId Id="22" Count="0" />
-      <LineId Id="18" Count="0" />
-      <LineId Id="25" Count="0" />
-      <LineId Id="27" Count="0" />
-      <LineId Id="29" Count="0" />
-      <LineId Id="28" Count="0" />
-      <LineId Id="30" Count="1" />
+      <LineId Id="20" Count="2" />
       <LineId Id="26" Count="0" />
     </LineIds>
   </POU>

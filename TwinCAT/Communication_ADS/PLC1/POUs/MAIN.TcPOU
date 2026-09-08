@@ -6,6 +6,7 @@ VAR
 	Signal_IN		:	Signal_generator;
 	checking		:	Signal_check;
 	data_out		:	Struct_OUT;
+	data_in			:	Struct_IN;
 END_VAR
 ]]></Declaration>
     <Implementation>

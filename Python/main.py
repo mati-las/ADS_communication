@@ -1,6 +1,8 @@
 import pyads
 import ctypes
+import time
 from structs import Struct_IN, Struct_OUT
+from plc_communication import PLC_communication
 
 
 '''
@@ -11,13 +13,26 @@ the ADS routing configuration in TwinCAT 3
 '''
 PLC_IP = '127.0.0.1'
 PLC_AMS_IP = '192.168.1.8.1.1'     
-plc_read = 'MAIN.data_out'
+data_read = 'MAIN.data_out'
+data_write = 'MAIN.data_in'
 
+plc = PLC_communication(PLC_IP, PLC_AMS_IP, pyads.PORT_TC3PLC1)
 
-with pyads.Connection(PLC_AMS_IP, pyads.PORT_TC3PLC1, PLC_IP) as plc:
-    try:
-        data_in = plc.read_by_name(plc_read, pyads.PLCTYPE_BYTE * ctypes.sizeof(Struct_IN))
-        print(Struct_IN.from_buffer_copy(bytes(data_in)))
-    except pyads.ADSError as err:
-        print(f"Error {err}")
+data_in = Struct_IN()
+data_out = Struct_OUT()
+data_out.bHeat1 = True
+data_out.bOK = False
+
+plc.connect()
+
+try:
+    data_in = plc.read(data_read)
+    print("Data read from PLC:")
+    print(data_in)
+    plc.write(data_write, data_out.bHeat1, data_out.bOK)
+except Exception as e:
+    print(f"Communication error: {e}")
+finally:
+    plc.disconnect()
+
 

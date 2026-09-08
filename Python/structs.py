@@ -22,7 +22,7 @@ class Struct_OUT(ctypes.Structure):
      ]
 
     def __eq__(self, other):
-        if not isinstance(other, Struct_IN):
+        if not isinstance(other, Struct_OUT):
              return False
         return all(getattr(self, f[0]) == getattr(other, f[0]) for f in self._fields_)
 

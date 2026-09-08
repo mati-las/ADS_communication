@@ -82,3 +82,58 @@ LineIDs.dbg.bak
 Thumbs.db
 ehthumbs.db
 .DS_Store
+
+
+
+
+# Python - Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyd
+
+# Python - Virtual Environments
+venv/
+.venv/
+env/
+.env
+Pipfile.lock
+
+# Python - Distribution / Packaging
+build/
+dist/
+downloads/
+eggs/
+.eggs/
+*.egg-info/
+*.egg
+wheels/
+
+# Python - Unit tests and coverage reports
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+
+# Python - Type checking
+.mypy_cache/
+.pyre/
+
+# VS Code - Editor specific
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+.history/
+
+# PyADS & External Libraries specific
+# Ignore local copies of compiled C/C++ libraries or DLLs (TcAdsDll) if tested locally
+*.so
+*.dll
+*.dylib
+
+# Jupyter Notebooks (if you ever use them for data analysis from PLC)
+.ipynb_checkpoints/

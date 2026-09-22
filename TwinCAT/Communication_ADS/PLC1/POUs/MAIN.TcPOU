@@ -3,20 +3,17 @@
   <POU Name="MAIN" Id="{05fb79fc-cb93-42b1-8606-c8378de38b2a}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	Signal_IN		:	Signal_generator;
 	checking		:	Signal_check;
 	data_out		:	Struct_OUT;
 	data_in			:	Struct_IN;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[Signal_IN();
-checking(Signal_IN:= Signal_IN.SIGNAL);
+      <ST><![CDATA[checking(Signal_IN:= data_in.bHeat2);
 data_out.bHeat1 := checking.Signal_OUT;
 data_out.bOK := checking.bOK;]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
-      <LineId Id="19" Count="0" />
       <LineId Id="23" Count="0" />
       <LineId Id="32" Count="1" />
     </LineIds>

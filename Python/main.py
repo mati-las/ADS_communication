@@ -3,6 +3,7 @@ import ctypes
 import time
 from structs import Struct_IN, Struct_OUT
 from plc_communication import PLC_communication
+from signal_logic import SignalLogic
 
 
 '''
@@ -18,21 +19,26 @@ data_write = 'MAIN.data_in'
 
 plc = PLC_communication(PLC_IP, PLC_AMS_IP, pyads.PORT_TC3PLC1)
 
-data_in = Struct_IN()
-data_out = Struct_OUT()
-data_out.bHeat1 = True
-data_out.bOK = False
+signal = SignalLogic()
 
-plc.connect()
+data_in = Struct_IN()
+
 
 try:
-    data_in = plc.read(data_read)
-    print("Data read from PLC:")
-    print(data_in)
-    plc.write(data_write, data_out.bHeat1, data_out.bOK)
+    plc.connect()
+    while True:
+        signal.update_time_and_signal()
+        try:
+            data_in = plc.read(data_read)  
+            b_OK = signal.update_info(data_in)
+            plc.write(data_write, signal.signal_start, b_OK)
+        except pyads.ADSError:
+            pass
+        time.sleep(0.1)
 except Exception as e:
     print(f"Communication error: {e}")
+except KeyboardInterrupt:
+    print("Program stopped by keybord interrupt")
 finally:
     plc.disconnect()
-
-
+    print("Connection closed")
